@@ -1,2 +1,2 @@
 # starman
-2d platformer videogame
+2D platformer videogame
