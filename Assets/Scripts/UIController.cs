@@ -134,14 +134,15 @@ public class UIController : MonoBehaviour
 
     public void UseBulletPack()
     {
-        AnalyticsService.Instance.CustomData("pantallaAccedida", new Dictionary<string, object>()
+        if (PlayerInventaryController.instance.bulletPacks > 0) {
+            AnalyticsService.Instance.CustomData("pantallaAccedida", new Dictionary<string, object>()
         {
             { "Id_scene", "Level1" },
             { "Id__button", "use_bullet_pack" },
 
         });
 
-        AnalyticsService.Instance.CustomData("usedProduct", new Dictionary<string, object>()
+            AnalyticsService.Instance.CustomData("usedProduct", new Dictionary<string, object>()
                 {
                     { "id_product", "00000005" },
                     { "product_type", "bullets" },
@@ -150,11 +151,12 @@ public class UIController : MonoBehaviour
 
                 });
 
-        //PlayerHealthController.instance.FillHealth();
-        PlayerHealthController.instance.currentBullets = PlayerHealthController.instance.maxBullets;
-        UIController.instance.UpdateBulletsUI();
-        //PlayerHealthController.instance.currentBullets += invincPlayer(invincAmount);
-        PlayerInventaryController.instance.DecrementBulletPack(); 
+            //PlayerHealthController.instance.FillHealth();
+            PlayerHealthController.instance.currentBullets = PlayerHealthController.instance.maxBullets;
+            UIController.instance.UpdateBulletsUI();
+            //PlayerHealthController.instance.currentBullets += invincPlayer(invincAmount);
+            PlayerInventaryController.instance.DecrementBulletPack();
+        }
     }
     public void UpdateHearts(int hearts)
     {
@@ -174,6 +176,11 @@ public class UIController : MonoBehaviour
     public void UpdateBulletPackItems(int item)
     {
        bulletPackItems.text = "X " + item.ToString();
+    }
+
+    public void UpdateBulletPackItem()
+    {
+        bulletPackItems.text = PlayerInventaryController.instance.bulletPacks.ToString();
     }
 
     public void UpdateCreditItems(int item)

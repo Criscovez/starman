@@ -58,9 +58,9 @@ public class RemoteConfig : MonoBehaviour
     {
         Debug.Log("RemoteConfigService.Instance.appConfig fetched: " + RemoteConfigService.Instance.appConfig.config.ToString());
         enableShop = RemoteConfigService.Instance.appConfig.GetBool("enableShop");
-        Debug.Log("enable shop" + enableShop.ToString());
+        //Debug.Log("enable shop" + enableShop.ToString());
         extraCredits = RemoteConfigService.Instance.appConfig.GetInt("extraCredits");
-        Debug.Log(extraCredits);
+        //Debug.Log(extraCredits);
         if (storeButton != null) storeButton.SetActive(enableShop);
         
         //Debug.Log("store shop" + storeButton);

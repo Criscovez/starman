@@ -57,7 +57,7 @@ public class PlayerHealthController : MonoBehaviour
         UIController.instance.UpdateHealth(currentHealth, maxHealth);
         
        string  m_Scene = SceneManager.GetActiveScene().name;
-        Debug.Log(m_Scene);
+       // Debug.Log(m_Scene);
 
         if(m_Scene == "StoreScene")
         {

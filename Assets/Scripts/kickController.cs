@@ -19,7 +19,7 @@ public class kickController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("kick");
+    //   Debug.Log("kick");
         if (other.tag == "Enemy")
         {
             other.GetComponent<EnemyHealthController>().DamageEnemy(damageAmount);

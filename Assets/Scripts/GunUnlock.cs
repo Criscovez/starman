@@ -54,10 +54,17 @@ public class GunUnlock : MonoBehaviour
                     //UIController.instance.UpdateCredit(PlayerHealthController.instance.maxBullets);
                     PlayerInventaryController.instance.IncrementBulletPacks(1);
                 }
+                else
+                {
+                    PlayerHealthController.instance.currentBullets = bulletsAmount;
+                    UIController.instance.UpdateBulletsUI();
+                }
+
                // else { }
 
                 UIController.instance.UpdateCredit(PlayerHealthController.instance.currentCredits);
                 UIController.instance.UpdateBulletsUI();
+                UIController.instance.UpdateBulletPackItem();
                 //UIController.instance.bulletsText.text = PlayerHealthController.instance.currentBullets.ToString();
 
                 if (unlockDoubleJump)
