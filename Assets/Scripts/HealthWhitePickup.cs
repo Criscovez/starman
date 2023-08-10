@@ -25,6 +25,7 @@ public class HealthWhitePickup : MonoBehaviour
                 //PlayerHealthController.instance.HealPlayer(healthAmount);
                 PlayerHealthController.instance.currentCredits -= cost;
                 //UIController.instance.UpdateCredit(PlayerHealthController.instance.currentCredits);
+                UIController.instance.UpdateCredit(PlayerHealthController.instance.currentCredits);
 
                 if (pickEffect != null)
                 {

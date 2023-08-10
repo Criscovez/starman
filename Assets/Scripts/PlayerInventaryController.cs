@@ -94,18 +94,7 @@ public class PlayerInventaryController : MonoBehaviour
         bulletPacks--;
 
         //Debug.Log(whiteHearts);
-        UIController.instance.UpdateBulletPackItems(-1);
+        UIController.instance.UpdateBulletPackItems(bulletPacks);
     }
 
-
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

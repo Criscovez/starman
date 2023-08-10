@@ -44,11 +44,12 @@ public class UIController : MonoBehaviour
         instance = this;
     }
 
-    
+
     void Start()
     {
         PlayerHealthController.instance.UpdateUI();
         creditsItems.text = "X " + PlayerHealthController.instance.currentCredits.ToString();
+        bulletPackItems.text = "X " + PlayerInventaryController.instance.bulletPacks.ToString();
         bulletsText.text = PlayerHealthController.instance.currentBullets.ToString();
     }
 
@@ -58,17 +59,18 @@ public class UIController : MonoBehaviour
         if (fadeIn)
         {
             // Debug.Log(blackScreen);
-        blackScreen.color = new Color(blackScreen.color.r, 
-                                      blackScreen.color.g, 
-                                      blackScreen.color.b, 
-                                      Mathf.MoveTowards(blackScreen.color.a, 1f, fadeSpeed * Time.deltaTime));
+            blackScreen.color = new Color(blackScreen.color.r,
+                                          blackScreen.color.g,
+                                          blackScreen.color.b,
+                                          Mathf.MoveTowards(blackScreen.color.a, 1f, fadeSpeed * Time.deltaTime));
 
-            if(blackScreen.color.a == 1f)
-            {                       
+            if (blackScreen.color.a == 1f)
+            {
                 fadeIn = false;
             }
 
-        } else if (fadeOut)
+        }
+        else if (fadeOut)
         {
             blackScreen.color = new Color(blackScreen.color.r,
                               blackScreen.color.g,
@@ -89,14 +91,17 @@ public class UIController : MonoBehaviour
     }
     public void FillHealth()
     {
-        AnalyticsService.Instance.CustomData("pantallaAccedida", new Dictionary<string, object>()
+
+        if (PlayerInventaryController.instance.whiteHearts > 0)
+        {
+            AnalyticsService.Instance.CustomData("pantallaAccedida", new Dictionary<string, object>()
         {
             { "Id_scene", "Level1" },
             { "Id__button", "fill_health" },
 
         });
 
-        AnalyticsService.Instance.CustomData("usedProduct", new Dictionary<string, object>()
+            AnalyticsService.Instance.CustomData("usedProduct", new Dictionary<string, object>()
                 {
                     { "id_product", "00000004" },
                     { "product_type", "energia" },
@@ -105,20 +110,23 @@ public class UIController : MonoBehaviour
 
                 });
 
-        PlayerHealthController.instance.FillHealth();
-        PlayerInventaryController.instance.DecrementHeart();
+            PlayerHealthController.instance.FillHealth();
+            PlayerInventaryController.instance.DecrementHeart();
+        }
     }
 
     public void ActiveInvinc()
     {
-        AnalyticsService.Instance.CustomData("pantallaAccedida", new Dictionary<string, object>()
+        if (PlayerInventaryController.instance.invincibleItems > 0)
+        {
+            AnalyticsService.Instance.CustomData("pantallaAccedida", new Dictionary<string, object>()
         {
             { "Id_scene", "Level1" },
             { "Id__button", "active_invinc" },
 
         });
 
-        AnalyticsService.Instance.CustomData("usedProduct", new Dictionary<string, object>()
+            AnalyticsService.Instance.CustomData("usedProduct", new Dictionary<string, object>()
                 {
                     { "id_product", "00000002" },
                     { "product_type", "PowerUp" },
@@ -127,29 +135,29 @@ public class UIController : MonoBehaviour
 
                 });
 
-        //PlayerHealthController.instance.FillHealth();
-        PlayerHealthController.instance.invincPlayer(invincAmount);
-        PlayerInventaryController.instance.DecrementInvincItem();
+            //PlayerHealthController.instance.FillHealth();
+            PlayerHealthController.instance.invincPlayer(invincAmount);
+            PlayerInventaryController.instance.DecrementInvincItem();
+        }
     }
 
     public void UseBulletPack()
     {
-        if (PlayerInventaryController.instance.bulletPacks > 0) {
-            AnalyticsService.Instance.CustomData("pantallaAccedida", new Dictionary<string, object>()
+        if (PlayerInventaryController.instance.bulletPacks > 0)
         {
-            { "Id_scene", "Level1" },
-            { "Id__button", "use_bullet_pack" },
-
-        });
+            AnalyticsService.Instance.CustomData("pantallaAccedida", new Dictionary<string, object>()
+            {
+                { "Id_scene", "Level1" },
+                { "Id__button", "use_bullet_pack" },
+            });
 
             AnalyticsService.Instance.CustomData("usedProduct", new Dictionary<string, object>()
-                {
-                    { "id_product", "00000005" },
-                    { "product_type", "bullets" },
-                    { "idPantalla", "00000001" },
-                    { "IDLevel", "00000001" },
-
-                });
+            {
+                { "id_product", "00000005" },
+                { "product_type", "bullets" },
+                { "idPantalla", "00000001" },
+                { "IDLevel", "00000001" },
+            });
 
             //PlayerHealthController.instance.FillHealth();
             PlayerHealthController.instance.currentBullets = PlayerHealthController.instance.maxBullets;
@@ -160,7 +168,7 @@ public class UIController : MonoBehaviour
     }
     public void UpdateHearts(int hearts)
     {
-        whiteHearts.text = "X " +  hearts.ToString();
+        whiteHearts.text = "X " + hearts.ToString();
     }
 
     public void UpdateKeys(int key)
@@ -175,12 +183,12 @@ public class UIController : MonoBehaviour
 
     public void UpdateBulletPackItems(int item)
     {
-       bulletPackItems.text = "X " + item.ToString();
+        bulletPackItems.text = "X " + item.ToString();
     }
 
     public void UpdateBulletPackItem()
     {
-        bulletPackItems.text = PlayerInventaryController.instance.bulletPacks.ToString();
+        bulletPackItems.text = "X " + PlayerInventaryController.instance.bulletPacks.ToString();
     }
 
     public void UpdateCreditItems(int item)
@@ -188,7 +196,7 @@ public class UIController : MonoBehaviour
         creditsItems.text = "X " + item.ToString();
     }
 
-    public void UpdateHealth(int currentHealth, int maxHealth) 
+    public void UpdateHealth(int currentHealth, int maxHealth)
     {
         healthSlider.maxValue = maxHealth;
         healthSlider.value = currentHealth;
