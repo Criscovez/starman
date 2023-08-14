@@ -34,9 +34,6 @@ public class PlayerController : MonoBehaviour
         canMove = true;
     }
 
-
-
-    // Update is called once per frame
     void Update()
     {
         if (canMove && Time.timeScale != 0)
@@ -76,14 +73,16 @@ public class PlayerController : MonoBehaviour
                 theRB.velocity = new Vector2(theRB.velocity.x, jumpForce);
             }
 
-            if (Input.GetButtonDown("Fire2"))
+            if (Input.GetButtonDown("Fire2") && isOnGround)
             {
                 anim.SetTrigger("kick");
-                theRB.velocity = new Vector2(jumpForce / 2, theRB.velocity.y);
+                AudioController.instance.PlaySFXAdjusted(10);
+                //theRB.velocity = new Vector2(jumpForce / 2, theRB.velocity.y);
+                //theRB.velocity = new Vector2(theRB.velocity.x, jumpForce * 0.7f);
                 //Debug
 
-                
-                
+
+
             }
 
             if (Input.GetButtonDown("Fire1") && abilities.canUseGun)
