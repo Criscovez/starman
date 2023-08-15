@@ -29,13 +29,13 @@ public class BulletController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
 
-        if(other.tag == "Enemy")
+        if(other.CompareTag(KnownTags.Enemy))
         {
             other.GetComponent<EnemyHealthController>().DamageEnemy(damageAmount);
             
         }
 
-        if(other.tag == "Boss")
+        if(other.CompareTag("Boss"))
         {
             BossHealthController.instance.TakeDamage(damageAmount);
         }

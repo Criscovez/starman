@@ -9,7 +9,7 @@ public class Cave2Controller : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         
-        if (other.tag == "Player")
+        if (other.CompareTag(KnownTags.Player))
         {
             PlayerInventaryController player = other.GetComponentInParent<PlayerInventaryController>();
             Debug.Log("enter cave");

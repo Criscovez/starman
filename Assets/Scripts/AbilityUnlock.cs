@@ -22,7 +22,7 @@ public class AbilityUnlock : MonoBehaviour
         //Debug.Log("Triger Player");
         //Debug.Log(other.tag);
 
-        if (other.tag == "Player")
+        if (other.CompareTag(KnownTags.Player))
         {
             if (cost <= PlayerHealthController.instance.currentCredits)
             {

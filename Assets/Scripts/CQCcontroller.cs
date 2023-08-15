@@ -18,7 +18,7 @@ public class CQCcontroller : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("kick");
-        if (other.tag == "Enemy")
+        if (other.CompareTag(KnownTags.Enemy))
         {
             Debug.Log("kick");
         }

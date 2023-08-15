@@ -35,7 +35,7 @@ public class BossShoot : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         Debug.Log(other.gameObject.tag);
-        if(other.gameObject.tag == "Player")
+        if(other.gameObject.CompareTag(KnownTags.Player))
         {
             PlayerHealthController.instance.DamagePlayer(damageAmount);
         }
