@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class BossBattle : MonoBehaviour
 {
-    private CameraController camera;
+    private new CameraController camera;
     public Transform camPosition;
     public float camSpeed;
 
