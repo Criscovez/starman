@@ -38,7 +38,7 @@ public class AbilityUnlock : MonoBehaviour
                 //Debug.Log("Triger Player");
                 PlayerAbilityTracker player = other.GetComponentInParent<PlayerAbilityTracker>();
 
-                PlayerHealthController.instance.currentCredits -= cost;
+                PlayerHealthController.instance.UpdateCredits(-cost);
                 UIController.instance.UpdateCredit(PlayerHealthController.instance.currentCredits);
 
                 if (unlockDoubleJump)

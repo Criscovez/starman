@@ -26,7 +26,32 @@ public class PlayerHealthController : MonoBehaviour
 
     public SpriteRenderer[] playerSprite;
 
-    public int currentCredits;
+    private int _currentCredits;
+
+    public int currentCredits
+    {
+        get { return _currentCredits; }
+        set
+        {
+            int newValue = _currentCredits - value;
+            if (newValue < 0)
+            {
+                newValue = 0;
+            }
+        }
+
+    }
+
+    public void UpdateCredits(int deltaValue)
+    {
+        int newValue = _currentCredits + deltaValue;
+        if (newValue < 0)
+        {
+            newValue = 0;
+        }
+
+        _currentCredits = newValue;
+    }
 
     public int maxCredits;
 
