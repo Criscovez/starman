@@ -15,28 +15,9 @@ public class OptionController : MonoBehaviour
 
     void Start()
     {
-        AnalyticsService.Instance.CustomData("pantallaAccedida", new Dictionary<string, object>()
-        {
-            { "Id_scene", "main_scene" },
-            { "Id__button", "option" },
+        AnalyticsTracker.TrackScreenSeen("main_scene", "option");
 
-        });
-
-        if (PlayerPrefs.HasKey("musicVolume"))
-        {
-            LoadVolume();
-        } else
-        {
-            SetMusicVolume();
-            SetSfxVolume();
-
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        LoadVolume();
     }
 
     public void SetMusicVolume()
@@ -57,18 +38,17 @@ public class OptionController : MonoBehaviour
 
     private void LoadVolume()
     {
-        musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
+        musicSlider.value = PlayerPrefs.GetFloat("musicVolume", 1);
         SetMusicVolume();
-        sfxSlider.value = PlayerPrefs.GetFloat("sfxVolume");
+        sfxSlider.value = PlayerPrefs.GetFloat("sfxVolume",  1);
         SetSfxVolume();
     }
 
     public void ResetOptions()
-    {
-        //PlayerPrefs.SetFloat("MyExposedParamMusic", Mathf.Log10(.5f) * 20);
-        //PlayerPrefs.SetFloat("MyExposedParamSfx", Mathf.Log10(.5f) * 20);
-        PlayerPrefs.SetInt("NewGamePlus", 0);
-        PlayerPrefs.SetInt("Credits", 0);
+    {        
+        PlayerPrefs.DeleteAll();
+        LoadVolume();
+
         newGamePlusButton.SetActive(false);
     }
 
